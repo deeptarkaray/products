@@ -29,6 +29,9 @@ public class ProductServiceImpl implements ProductService {
     @Value("${service.product.url}")
     private String url;
 
+    private static final String SHOW_WAS_THEN_NOW = "ShowWasThenNow";
+
+    private static final String SHOW_WAS_NOW = "ShowWasNow";
 
     @Override
     public List<DesiredProduct> getProducts(String labelType) {
@@ -92,11 +95,11 @@ public class ProductServiceImpl implements ProductService {
     private String getPriceLabel(String labelType, Price price) {
         String priceLabel = "";
         switch(labelType) {
-            case "ShowWasNow" :
+            case SHOW_WAS_NOW :
                 priceLabel = "Was " + formatPrice(price.getWas()) + ", now " + formatPrice(price.getNow());
                 break;
 
-            case "ShowWasThenNow" :
+            case SHOW_WAS_THEN_NOW :
                 priceLabel = "Was " + formatPrice(price.getWas());
                 if (price.getThen2() != null && !("").equals(price.getThen2())) {
                     priceLabel = priceLabel + ",then " + formatPrice(price.getThen2());
